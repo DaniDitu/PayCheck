@@ -1,5 +1,7 @@
 {
-  "name": "PayCheck",
-  "description": "Consulente Virtuale Esperto in Paghe: Analisi approfondita di buste paga italiane, verifica CCNL, contatori ferie e coerenza retributiva con spiegazioni professionali.",
-  "requestFramePermissions": []
+  "name": "PayCheck Expert",
+  "description": "Consulente Virtuale PWA: Analisi approfondita di buste paga italiane con supporto offline e installazione mobile.",
+  "requestFramePermissions": [
+    "camera"
+  ]
 }
