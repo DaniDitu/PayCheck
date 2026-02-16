@@ -15,13 +15,16 @@ export const analyzePayslipWithGemini = async (pdfText: string): Promise<Analysi
   // non possiamo usare responseSchema nella config (limitazione API).
   const schemaDescription = JSON.stringify(ANALYSIS_SCHEMA, null, 2);
 
+  const today = new Date().toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       contents: [
         {
             role: 'user',
             parts: [
+                { text: `DATA DI OGGI: ${today}. Usa questa data per verificare la validità attuale di Bonus e normative.` },
                 { text: PAYSLIP_ANALYSIS_PROMPT },
                 { text: `Ecco lo SCHEMA JSON che DEVI rispettare rigorosamente nel tuo output:\n\n${schemaDescription}` },
                 { text: `Ecco il contenuto estratto dal PDF della busta paga:\n\n${pdfText}` }
@@ -42,6 +45,7 @@ export const analyzePayslipWithGemini = async (pdfText: string): Promise<Analysi
     }
 
     // --- ROBUST JSON PARSING STRATEGY ---
+    // Gemini 2/3 con Search a volte aggiunge testo prima del JSON.
     let cleanJson = textResponse.replace(/```json/g, '').replace(/```/g, '');
     
     const firstBrace = cleanJson.indexOf('{');
