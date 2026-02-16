@@ -26,7 +26,7 @@ const DonationWall: React.FC<Props> = ({ onDonationSuccess }) => {
           </div>
           <h2 className="text-2xl font-bold mb-2">Supporta il Progetto</h2>
           <p className="text-blue-100 max-w-md mx-auto">
-            Aiutaci a mantenere attivo il servizio e a coprire i costi di gestione App.
+            Aiutami a mantenere attivo il servizio e a coprire i costi di gestione App.
           </p>
         </div>
 
