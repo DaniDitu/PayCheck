@@ -11,102 +11,24 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PagheExpert" />
     
-    <!-- Usa percorsi relativi (./) per supportare deploy in sottocartelle/sandbox -->
     <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1572/1572005.png" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      // Configure Tailwind to use Inter font
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          },
-        },
-      }
 
+    <script>
       // Register Service Worker for PWA
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          // Usiamo un path relativo semplice. In ambienti sandbox complessi (proxy),
-          // la registrazione potrebbe fallire per mismatch di origine. 
-          // Catturiamo l'errore per non bloccare l'app.
           navigator.serviceWorker.register('./sw.js')
             .then(reg => console.log('Service Worker registered'))
-            .catch(err => {
-              // Logghiamo come debug/info per non intasare la console di errori rossi in ambienti dev
-              console.debug('PWA Service Worker info:', err.message);
-            });
+            .catch(err => console.debug('PWA Service Worker info:', err.message));
         });
       }
     </script>
-    <style>
-      body {
-        background-color: #f8fafc;
-        /* Prevent elastic scroll on mobile for better PWA feel */
-        overscroll-behavior-y: contain;
-      }
-      /* Custom scrollbar for better aesthetics */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f5f9; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8; 
-      }
-
-      /* PRINT STYLES FOR EXACT UI REPLICATION */
-      @media print {
-        @page {
-          margin: 1cm;
-          size: A4;
-        }
-        
-        body {
-          background-color: white !important;
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-        }
-
-        /* Hide scrollbars in print */
-        ::-webkit-scrollbar {
-          display: none;
-        }
-
-        /* Ensure grid layouts work in print */
-        .grid {
-          display: grid !important;
-        }
-      }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "pdfjs-dist": "https://esm.sh/pdfjs-dist@3.11.174",
-    "jspdf-autotable": "https://esm.sh/jspdf-autotable@^5.0.7",
-    "vite": "https://esm.sh/vite@^7.3.1",
-    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
-    "jspdf": "https://esm.sh/jspdf@^4.1.0"
-  }
-}
-</script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>

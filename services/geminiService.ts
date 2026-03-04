@@ -4,7 +4,7 @@ import { ANALYSIS_SCHEMA, PAYSLIP_ANALYSIS_PROMPT } from "../constants";
 import { AnalysisResult } from "../types";
 
 export const analyzePayslipWithGemini = async (pdfText: string): Promise<AnalysisResult> => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error("API Key mancante.");
   }
