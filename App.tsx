@@ -19,7 +19,7 @@ import { generateAnalysisPdf } from './services/pdfExportService';
 import { AnalysisResult, AnalysisStatus } from './types';
 import { Loader2, Printer, LockKeyhole } from 'lucide-react';
 
-const ADMIN_EMAIL = "danieleditu@gmail.com";
+const ADMIN_EMAIL = "bustapaga@paycheck.it";
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<AnalysisStatus>('idle');
